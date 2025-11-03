@@ -1,0 +1,3 @@
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'} %5p [%t] %c{1}.%M:%L - %m%n"

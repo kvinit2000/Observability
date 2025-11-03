@@ -1,0 +1,49 @@
+# Observability Learning Notes
+
+## Useful Links
+- **Swagger UI** → http://localhost:8080/swagger-ui/index.html
+- **OpenAPI YAML** → http://localhost:8080/openapi.yaml
+
+---
+
+## What we have achieved so far ✅
+
+### API side
+- Spring Boot REST API with `/api/hello` + `/api/compute`
+- `compute` sometimes throws `RuntimeException("simulated_failure")`
+- Added **GlobalExceptionHandler** so errors return our custom `ErrorResponse` JSON instead of Spring generic error body
+- Added Micrometer annotations:
+  - `@Observed` → trace/span naming
+  - `@Timed` → method latency measurement
+- Server logs each request (shows endpoint + params)
+
+### Load Client side
+- Java HttpClient load generator continuously calls `/hello` & `/compute`
+- Prints **status code + response body** to console
+- We now see:
+  - successful responses
+  - random 500s with our own `{"error":"simulated_failure","endpoint":"/api/compute"}` JSON
+- This stream acts as “synthetic load” to simulate real traffic
+
+### Key Outcome
+We now have a **controlled signal generator** that produces:
+- latency variation
+- random errors
+- structured JSON responses
+
+This is ready for:
+- regression detection
+- anomaly / AI correlation
+- later → OTel exporter + collector pipeline
+
+---
+
+## How to run
+
+### Terminal #1 — start API
+```bash
+mvn spring-boot:run
+
+###  Terminal #2 — start load generator
+```bash
+mvn -q exec:java
