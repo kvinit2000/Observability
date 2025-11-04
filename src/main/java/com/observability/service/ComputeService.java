@@ -1,12 +1,37 @@
 package com.observability.service;
 
+import com.observability.dto.ComputeResponse;
+import com.observability.dto.HelloResponse;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class ComputeService {
 
+    @Timed(value = "demo.hello.latency")
+    public HelloResponse computeHello(String name) {
+        long ts = Instant.now().toEpochMilli();
+        return new HelloResponse("Hello, " + name + "!", "/api/hello", ts);
+    }
+
+    @Timed(value = "demo.compute.latency")
+    public ComputeResponse computeFibTimed(int n) {
+        long start = System.currentTimeMillis();
+
+        maybeFail();
+        int result = fib(n);
+        jitterSleep();
+
+        int latency = (int) (System.currentTimeMillis() - start);
+
+        return new ComputeResponse(result, "/api/compute",
+                System.currentTimeMillis(), latency);
+    }
+
+    /** fibonacci — same logic as before */
     public int fib(int n) {
         n = Math.max(1, Math.min(30, n));   // clamp 1–30
         int a = 0, b = 1;
@@ -25,7 +50,7 @@ public class ComputeService {
         }
     }
 
-    /** add jittery latency 20–200 ms */
+    /** jitter 20–200ms */
     public void jitterSleep() {
         try {
             Thread.sleep(ThreadLocalRandom.current().nextInt(20, 201));
@@ -34,4 +59,3 @@ public class ComputeService {
         }
     }
 }
-
