@@ -25,7 +25,6 @@ public class DemoController {
     public DemoController(ComputeService compute) { this.compute = compute; }
 
     @GetMapping("/hello")
-    @Observed(name = "demo.hello", contextualName = "hello")
     @Timed(value = "demo.hello.latency")
     public ResponseEntity<HelloResponse> hello(@RequestParam(defaultValue = "world") String name) {
         var ts = Instant.now().toEpochMilli();
@@ -35,7 +34,6 @@ public class DemoController {
     }
 
     @GetMapping("/compute")
-    @Observed(name = "demo.compute", contextualName = "compute")
     @Timed(value = "demo.compute.latency")
     public ResponseEntity<ComputeResponse> compute(@RequestParam(defaultValue = "10") int n) {
         var start = System.currentTimeMillis();
