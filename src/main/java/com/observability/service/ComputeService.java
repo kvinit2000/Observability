@@ -3,6 +3,7 @@ package com.observability.service;
 import com.observability.dto.ComputeResponse;
 import com.observability.dto.HelloResponse;
 import io.micrometer.core.annotation.Timed;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -11,12 +12,14 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class ComputeService {
 
+    @Observed(name = "demo.hello")
     @Timed(value = "demo.hello.latency")
     public HelloResponse computeHello(String name) {
         long ts = Instant.now().toEpochMilli();
         return new HelloResponse("Hello, " + name + "!", "/api/hello", ts);
     }
 
+    @Observed(name = "demo.compute")
     @Timed(value = "demo.compute.latency")
     public ComputeResponse computeFibTimed(int n) {
         long start = System.currentTimeMillis();
