@@ -47,3 +47,29 @@ mvn spring-boot:run
 ###  Terminal #2 — start load generator
 ```bash
 mvn -q exec:java
+
+### Key Metrics
+#### Useful URLs
+- Index of endpoints: http://localhost:8080/actuator
+- List all metric names: http://localhost:8080/actuator/metrics
+- Health: http://localhost:8080/actuator/health
+
+#### Your custom timers (from @Timed)
+- Compute latency: http://localhost:8080/actuator/metrics/demo.compute.latency
+- Hello latency: http://localhost:8080/actuator/metrics/demo.hello.latency
+- You’ll see COUNT, TOTAL_TIME, and MAX.
+
+#### Built-in HTTP metric (very useful)
+- All HTTP: http://localhost:8080/actuator/metrics/http.server.requests
+- Only 500s:
+http://localhost:8080/actuator/metrics/http.server.requests?tag=status:500
+
+#### By endpoint (uri) and method:
+- http://localhost:8080/actuator/metrics/http.server.requests?tag=uri:/api/compute&tag=method:GET
+- By outcome (SUCCESS/CLIENT_ERROR/SERVER_ERROR):
+http://localhost:8080/actuator/metrics/http.server.requests?tag=outcome:SERVER_ERROR
+
+#### JVM / system examples
+- http://localhost:8080/actuator/metrics/jvm.memory.used
+- http://localhost:8080/actuator/metrics/system.cpu.usage
+- http://localhost:8080/actuator/metrics/jvm.gc.pause
