@@ -1,9 +1,0 @@
-com/observability/dto/HelloResponse.class
-com/observability/client/LoadClient.class
-com/observability/dto/ComputeResponse.class
-com/observability/web/DemoController.class
-com/observability/service/ComputeService.class
-com/observability/config/MeterRegistryConfig.class
-com/observability/error/GlobalExceptionHandler.class
-com/observability/dto/ErrorResponse.class
-com/observability/ObservabilityApplication.class
