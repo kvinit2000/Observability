@@ -5,7 +5,6 @@
             <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36} req=%X{requestId:-} - %msg%n"/>
         </Console>
     </Appenders>
-
     <Loggers>
         <Root level="info">
             <AppenderRef ref="Console"/>
