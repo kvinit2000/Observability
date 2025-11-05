@@ -6,11 +6,11 @@ import org.slf4j.LoggerFactory;
 public class SimpleApp {
     private static final Logger log = LoggerFactory.getLogger(SimpleApp.class);
     public static void main(String[] args) {
-        System.out.println("App starting...");
+        log.debug("App starting...");
 
         int result = computeSquare(5);
 
-        System.out.println("Result = " + result);
+        log.debug("Result = " + result);
     }
 
     // one method
