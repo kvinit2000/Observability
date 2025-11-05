@@ -2,12 +2,7 @@
 <Configuration status="WARN">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <!--
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36} req=%X{requestId:-} - %msg%n"/>
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p %logger{36} req=%X{requestId:-} - %msg%n"/>
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p %logger{36} MDC=%X - %msg%n"/>
-            -->
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p %logger{36} trace=%X{trace_id:-} span=%X{span_id:-} - %msg%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p %logger{36} trace=%X{trace_id:-none} span=%X{span_id:-none} - %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>
