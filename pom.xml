@@ -21,6 +21,7 @@
     <modules>
         <module>service-a</module>
         <module>service-c</module>
+        <module>module-oltp</module>
         <!-- add more modules as you create them -->
         <!-- <module>service-b</module> -->
         <!-- <module>service-c</module> -->
