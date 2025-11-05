@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: service-c
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    #otlp:
+      #tracing:
+      #endpoint: http://localhost:4318/v1/traces  # your OTel collector
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-},%X{spanId:-}]"
+server:
+  port: 8082
